@@ -1,0 +1,75 @@
+.game {
+  background-color: rgb(248, 248, 248);
+  width: 300px;
+
+  .teams {
+  }
+
+  .game-group {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    min-height: 40px;
+
+    .group-name {
+      width: 1em;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      background-color: rgb(130, 187, 189);
+      color: #fff;
+      font-size: 12px;
+      line-height: 12px;
+      padding: 0 1px;
+    }
+
+    .group-name--color2 {
+      background-color: rgb(123, 178, 136);
+    }
+
+    .group-detail {
+      flex-grow: 1;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 1px;
+
+      .group-detail-item {
+        height: 40px;
+        background-color: #fff;
+
+        .group-detail-item-name {
+          font-weight: 600;
+          text-align: center;
+          height: 50%;
+        }
+
+        .group-detail-item-odds {
+          height: 50%;
+          text-align: center;
+        }
+      }
+
+      .group-detail-item--span3 {
+        grid-column-start: span 3;
+      }
+    }
+
+    .group-detail--score {
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .group-detail--total {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
+
+.effective {
+  .group-detail-item-odds {
+    color: red !important;
+  }
+}
+
+.ineffective {
+  color: rgb(238, 238, 238) !important;
+}

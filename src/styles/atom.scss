@@ -1,0 +1,124 @@
+.h-full {
+  height: 100%;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-screen {
+  height: 100vh;
+}
+
+.w-screen {
+  width: 100vw;
+}
+
+.pull-right {
+  float: right;
+}
+
+.pull-left {
+  float: left;
+}
+
+$fonts: (
+        12: 12px,
+        14: 14px
+);
+@each $type in map-keys($fonts) {
+  .font-#{$type} {
+    font-size: map-get($fonts, $type);
+  }
+}
+
+$gaps: (
+        1: 1px,
+        10: 10px,
+        20: 20px
+);
+@each $type in map-keys($gaps) {
+  .m-#{$type} {
+    margin: map-get($gaps, $type);
+  }
+  .mx-#{$type} {
+    margin-right: map-get($gaps, $type);
+    margin-left: map-get($gaps, $type);
+  }
+  .my-#{$type} {
+    margin-top: map-get($gaps, $type);
+    margin-bottom: map-get($gaps, $type);
+  }
+  .mt-#{$type} {
+    margin-top: map-get($gaps, $type);
+  }
+  .mr-#{$type} {
+    margin-right: map-get($gaps, $type);
+  }
+  .mb-#{$type} {
+    margin-bottom: map-get($gaps, $type);
+  }
+  .ml-#{$type} {
+    margin-left: map-get($gaps, $type);
+  }
+
+  .p-#{$type} {
+    padding: map-get($gaps, $type);
+  }
+  .px-#{$type} {
+    padding-right: map-get($gaps, $type);
+    padding-left: map-get($gaps, $type);
+  }
+  .py-#{$type} {
+    padding-top: map-get($gaps, $type);
+    padding-bottom: map-get($gaps, $type);
+  }
+  .pt-#{$type} {
+    padding-top: map-get($gaps, $type);
+  }
+  .pr-#{$type} {
+    padding-right: map-get($gaps, $type);
+  }
+  .pb-#{$type} {
+    padding-bottom: map-get($gaps, $type);
+  }
+  .pl-#{$type} {
+    padding-left: map-get($gaps, $type);
+  }
+}
+
+$aligns: (
+        left: left,
+        center: center,
+        right: right,
+        justify: justify,
+        start: start,
+        end: end
+);
+@each $type in map-keys($aligns) {
+  .text-#{$type} {
+    text-align: map-get($aligns, $type);
+  }
+}
+
+$cursors: (
+        auto: auto,
+        default: default,
+        pointer: pointer,
+        wait: wait,
+        move: move,
+        help: help
+);
+@each $type in map-keys($cursors) {
+  .cursor-#{$type} {
+    cursor: map-get($cursors, $type);
+  }
+}
+
+.positive {
+  color: red;
+}
+
+.negative {
+  color: green;
+}
