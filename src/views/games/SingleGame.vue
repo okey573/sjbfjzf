@@ -90,7 +90,6 @@
 
   const applicationStore = useApplicationStore()
   const deleteGame = () => {
-    console.log(props.game)
     applicationStore.games = applicationStore.games.filter(g => g.id !== props.game.id)
   }
 </script>

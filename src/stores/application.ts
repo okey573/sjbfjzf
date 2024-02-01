@@ -9,43 +9,7 @@ export const useApplicationStore = defineStore('applicationStore', () => {
 
 
   // 当前添加所有的比赛
-  const games = ref<Array<Game>>([
-    {
-      'id': 'so5TU6ct',
-      'home': '伊朗',
-      'guest': '叙利亚',
-      'win': 1.18,
-      'draw': 2.7,
-      'lose': 12.6,
-      'win$': 1.83,
-      'draw$': 3.25,
-      'lose$': 3.5,
-      '$1_0': 4.65,
-      '$2_0': 4.7,
-      'total_0': 11,
-      'total_1': 4.45,
-      'win_win': 1.72,
-      'draw_draw': 6.8
-    } as Game,
-    {
-      'id': 'qo3TU6ct',
-      'home': '里奥阿维',
-      'guest': '埃斯托里',
-      'win': 1.18,
-      'draw': 2.7,
-      'lose': 12.6,
-      'win$': 1.83,
-      'draw$': 3.25,
-      'lose$': 3.5,
-      '$1_0': 4.65,
-      '$2_0': 4.7,
-      'total_0': 11,
-      'total_1': 4.45,
-      'win_win': 1.72,
-      'draw_draw': 6.8
-    } as Game,
-
-  ])
+  const games = ref<Array<Game>>([])
 
   // 过关方式
   const passWay = ref<PassWay>('accumulator')
