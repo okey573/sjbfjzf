@@ -1,6 +1,8 @@
 <template>
   <div class="games-wrapper mt-20">
-    <SingleGame v-for="game in applicationStore.games" :key="game.id" :game="game" />
+    <TransitionGroup name="games-transition">
+      <SingleGame v-for="game in applicationStore.games" :key="game.id" :game="game" />
+    </TransitionGroup>
     <div class="ant-card ant-card-bordered add-single-game cursor-pointer"
          @click="addGame">
       <PlusOutlined :style="{fontSize: '40px'}" />
@@ -57,5 +59,31 @@
     > span {
       color: #fff;
     }
+  }
+
+  .games-transition-enter-active {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: zoomIn;
+    animation-name: zoomIn;
+  }
+
+  .games-transition-leave-active {
+    -webkit-animation-duration: .5s;
+    animation-duration: .5s;
+    -webkit-animation-duration: .5s;
+    animation-duration: .5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: zoomOut;
+    animation-name: zoomOut;
+  }
+
+  .games-transition-leave-active {
+    position: absolute;
   }
 </style>

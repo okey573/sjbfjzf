@@ -1,6 +1,5 @@
 <template>
   <a-card class="game">
-
     <template #title>
       <div class="teams">
         <span v-content-game-model:home />
