@@ -47,7 +47,8 @@
 
   const downloadGames = () => {
     const link = document.createElement('a')
-    link.download = `games.json`
+    const name = applicationStore.games.map(game => `${game.home}vs${game.guest}`).join('; ')
+    link.download = `${name}.json`
     link.href = 'data:text/plain,' + encodeURIComponent(JSON.stringify(applicationStore.games, null, 2))
     link.click()
   }
