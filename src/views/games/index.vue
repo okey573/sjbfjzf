@@ -84,6 +84,6 @@
   }
 
   .games-transition-leave-active {
-    position: absolute;
+    /*position: absolute;*/
   }
 </style>
