@@ -11,6 +11,7 @@
     </template>
   </a-input-number>
 
+  <Summary />
 
   <a-table v-if="dataSource.length"
            class="mt-20"
@@ -18,11 +19,8 @@
            bordered
            :dataSource="dataSource"
            :columns="columns"
-           :pagination="pagination">
-    <template #summary>
-      <Summary />
-    </template>
-  </a-table>
+           :pagination="pagination"
+  />
 </template>
 
 <script setup lang="tsx">
@@ -59,6 +57,8 @@
   const magnification = ref<Number>(1)
   // 总花费
   const totalCost = ref<Number>(0)
+  // 中奖率
+  const winningOdds = ref<Number>(1)
 
   const baseColumns = [
     {
@@ -152,6 +152,10 @@
 
           // 购买的结果
           const effectiveBets = bets.filter(r => effectiveOdd(game[r.key]))
+          // 单场比赛中奖的概率
+          const singleGameWinningOdds = effectiveBets.length / bets.length
+          // 每场比赛的中奖概率乘起来就是总的中奖概率
+          winningOdds.value *= singleGameWinningOdds
 
           const newTempSource = []
           for (const temp of tempSource) {
@@ -196,14 +200,20 @@
       const checkedGames = applicationStore.games.filter(g => g.checked)
       const count = dataSource.value.length
       const profitCount = dataSource.value.filter(item => item.profit > 0).length
-      // 中奖率
-      const winRatio = dataSource.value[0].winRatio
-      return <div>
-        <p>{checkedGames.map(game => `${game.home} vs ${game.guest}`).join('，')}，共{checkedGames.length} 场比赛， {checkedGames.length} 串
-          1</p>
-        <p>共 {dataSource.value.length} 注，买入 {magnification.value} 倍，总计花费 {totalCost.value} 元</p>
-        <p>其中：{profitCount} 种盈利，中奖率为{renderPercentage({ text: winRatio })}，
-          盈利概率为 {renderPercentage({ text: winRatio * profitCount / count })}</p>
+      return <div class="font-12">
+        <p>
+          共 {checkedGames.length} 场比赛：
+          {checkedGames.map(game => `${game.home} vs ${game.guest}`).join('，')}。
+          过关方式为 {DEFINITION.find(d => d.key === applicationStore.passWay).passWay}，
+          {checkedGames.length} 串 1
+        </p>
+
+        <p>选择买入 {dataSource.value.length} 注， {magnification.value} 倍，总计花费 {totalCost.value} 元</p>
+
+        <p>
+          其中：{profitCount} 种盈利，中奖率为{renderPercentage({ text: winningOdds.value })}，
+          盈利概率为 {renderPercentage({ text: winningOdds.value * profitCount / count })}
+        </p>
       </div>
     }
   })
