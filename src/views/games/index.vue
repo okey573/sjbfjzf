@@ -5,15 +5,18 @@
     </TransitionGroup>
     <div class="ant-card ant-card-bordered games-operate">
       <div class="games-operate-item cursor-pointer" @click="uploadGames">
-        <UploadOutlined :style="{fontSize: '40px'}" />
+        <UploadOutlined class="font-40" />
+        <span class="font-14">上传比赛</span>
       </div>
       <a-divider class="m-0" />
       <div class="games-operate-item cursor-pointer" @click="addGame">
-        <PlusOutlined :style="{fontSize: '40px'}" />
+        <PlusOutlined class="font-40" />
+        <span class="font-14">添加比赛</span>
       </div>
       <a-divider class="m-0" />
       <div class="games-operate-item cursor-pointer" @click="downloadGames">
-        <DownloadOutlined :style="{fontSize: '40px'}" />
+        <DownloadOutlined class="font-40" />
+        <span class="font-14">保存比赛</span>
       </div>
     </div>
   </div>
@@ -94,11 +97,12 @@
     &-item {
       flex: 1;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       width: 100%;
 
-      > span {
+      > span, > div {
         color: rgb(238, 238, 238);
       }
     }
@@ -106,7 +110,7 @@
     &-item:hover {
       background-color: rgb(248, 248, 248);
 
-      > span {
+      > span, > div {
         color: #fff;
       }
     }
