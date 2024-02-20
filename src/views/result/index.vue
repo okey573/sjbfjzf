@@ -1,5 +1,5 @@
 <template>
-  <a-input-number v-model:value="magnification" placeholder="购买倍率" @pressEnter="calculate">
+  <a-input-number v-model:value="magnificationModel" placeholder="购买倍率" @pressEnter="calculate">
     <template #prefix>
       购买倍率：
     </template>
@@ -53,8 +53,9 @@
 
   // 单注价格
   const singleBetPrice = 2
-  // 买入注数量
+  // 买入倍率
   const magnification = ref<Number>(1)
+  const magnificationModel = ref<Number>(1)
   // 总花费
   const totalCost = ref<Number>(0)
   // 中奖率
@@ -107,7 +108,7 @@
     let tempSource = [{
       totalOdd: 1,
       winRatio: 1,
-      bonus: 1 * singleBetPrice * magnification.value,
+      bonus: singleBetPrice * magnificationModel.value,
       profit: 0,
       profitRatio: 0
     }]
@@ -183,7 +184,7 @@
     }
 
     // 计算盈亏和盈亏比
-    totalCost.value = tempSource.length * 2 * magnification.value
+    totalCost.value = tempSource.length * singleBetPrice * magnificationModel.value
     tempSource.forEach(temp => {
       temp.profit = temp.bonus - totalCost.value
       temp.profitRatio = temp.profit / totalCost.value
@@ -192,6 +193,7 @@
     dataSource.value = tempSource
     columns.value = tempColumns.concat(baseColumns)
 
+    magnification.value = magnificationModel.value
     pagination.total = dataSource.value.length
   }
 
