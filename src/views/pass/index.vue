@@ -6,7 +6,7 @@
       </WrapperGame>
     </a-tab-pane>
 
-    <a-tab-pane key="result" tab="胜平负" force-render>
+    <a-tab-pane key="result" tab="胜平负">
       <WrapperGame :exist="applicationStore.resultList.length > 0">
         <GameResult v-for="game in applicationStore.resultList" :game="game" />
       </WrapperGame>
