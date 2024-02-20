@@ -1,15 +1,19 @@
 <template>
-  <a-input-number v-model:value="magnificationModel" placeholder="购买倍率" @pressEnter="calculate">
+  <a-input-number v-model:value="magnificationModel" placeholder="购买倍率" @pressEnter="calculate" style="width: 150px">
     <template #prefix>
       购买倍率：
     </template>
 
     <template #addonAfter>
-      <a-button type="text" size="small" @click="calculate">
+      <div class="cursor-pointer ant-btn ant-btn-text" @click="calculate">
         计算
-      </a-button>
+      </div>
     </template>
   </a-input-number>
+
+  <a-divider>
+    <span class="font-12 color-main">计算结果</span>
+  </a-divider>
 
   <Summary />
 

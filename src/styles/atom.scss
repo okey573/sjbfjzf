@@ -22,6 +22,18 @@
   float: left;
 }
 
+
+$colors: (
+        main: rgb(255, 153, 0),
+        positive: red,
+        negative: green
+);
+@each $type in map-keys($colors) {
+  .color-#{$type} {
+    color: map-get($colors, $type);
+  }
+}
+
 $fonts: (
         12: 12px,
         14: 14px
@@ -113,12 +125,4 @@ $cursors: (
   .cursor-#{$type} {
     cursor: map-get($cursors, $type);
   }
-}
-
-.positive {
-  color: red;
-}
-
-.negative {
-  color: green;
 }
