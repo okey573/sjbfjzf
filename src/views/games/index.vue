@@ -3,15 +3,27 @@
     <TransitionGroup name="games-transition">
       <SingleGame v-for="game in applicationStore.games" :key="game.id" :game="game" />
     </TransitionGroup>
-    <div class="ant-card ant-card-bordered add-single-game cursor-pointer"
-         @click="addGame">
-      <PlusOutlined :style="{fontSize: '40px'}" />
+    <div class="ant-card ant-card-bordered games-operate">
+      <div class="games-operate-item cursor-pointer" @click="uploadGames">
+        <UploadOutlined :style="{fontSize: '40px'}" />
+      </div>
+      <a-divider class="m-0" />
+      <div class="games-operate-item cursor-pointer" @click="addGame">
+        <PlusOutlined :style="{fontSize: '40px'}" />
+      </div>
+      <a-divider class="m-0" />
+      <div class="games-operate-item cursor-pointer" @click="downloadGames">
+        <DownloadOutlined :style="{fontSize: '40px'}" />
+      </div>
     </div>
   </div>
+
+  <input ref="fileUploadRef" type="file" style="display: none" accept=".json" @change="fileChange" />
 </template>
 
 <script setup lang="ts">
-  import { PlusOutlined } from '@ant-design/icons-vue'
+  import { ref } from 'vue'
+  import { PlusOutlined, DownloadOutlined, UploadOutlined } from '@ant-design/icons-vue'
   import SingleGame from '@/views/games/SingleGame.vue'
   import { useApplicationStore } from '@/stores/application.ts'
   import type { Game } from '@/types.ts'
@@ -29,6 +41,29 @@
       guest: '客场'
     } as Game)
   }
+
+  const downloadGames = () => {
+    const link = document.createElement('a')
+    link.download = `games.json`
+    link.href = 'data:text/plain,' + encodeURIComponent(JSON.stringify(applicationStore.games, null, 2))
+    link.click()
+  }
+
+  const fileUploadRef = ref()
+  const uploadGames = () => {
+    fileUploadRef.value?.click()
+  }
+  const fileChange = () => {
+    if (fileUploadRef.value && fileUploadRef.value.files) {
+      const file = fileUploadRef.value.files[0]
+      const fileReader = new FileReader()
+      fileUploadRef.value.value = ''
+      fileReader.onload = (e) => {
+        applicationStore.games = (JSON.parse(e.target.result as string))
+      }
+      fileReader.readAsText(file)
+    }
+  }
 </script>
 
 <style scoped lang="scss">
@@ -38,7 +73,7 @@
     gap: 10px;
   }
 
-  .add-single-game {
+  .games-operate {
     height: 735px;
     border: 1px rgb(238, 238, 238) solid;
     border-radius: 8px;
@@ -53,11 +88,27 @@
     }
   }
 
-  .add-single-game:hover {
-    background-color: rgb(248, 248, 248);
+  .games-operate {
+    flex-direction: column;
 
-    > span {
-      color: #fff;
+    &-item {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+
+      > span {
+        color: rgb(238, 238, 238);
+      }
+    }
+
+    &-item:hover {
+      background-color: rgb(248, 248, 248);
+
+      > span {
+        color: #fff;
+      }
     }
   }
 
