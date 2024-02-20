@@ -12,7 +12,7 @@
       <a-checkbox v-model:checked="game.checked" />
     </template>
 
-    <div class="game-group">
+    <div class="game-group cursor-not-allowed" @click.stop>
       <div class="group-name group-name--color2">总进球</div>
       <div class="group-detail group-detail--total">
         <div class="group-detail-item" v-for="item in TOTAL_BETS">

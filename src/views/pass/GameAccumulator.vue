@@ -12,7 +12,7 @@
       <a-checkbox v-model:checked="game.checked" />
     </template>
 
-    <div class="game-group">
+    <div class="game-group cursor-not-allowed" @click.stop>
       <div class="group-name">胜平负</div>
       <div class="group-detail">
         <div class="group-detail-item" v-for="item in RESULT_BETS">
@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <div class="game-group mt-1">
+    <div class="game-group mt-1 cursor-not-allowed" @click.stop>
       <div class="group-name group-name--color2">让球</div>
       <div class="group-detail">
         <div class="group-detail-item" v-for="item in HANDICAP_RESULT_BETS">
@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <div class="game-group mt-20">
+    <div class="game-group mt-20 cursor-not-allowed" @click.stop>
       <div class="group-name">比分</div>
       <div class="group-detail group-detail--score">
         <div v-for="item in SCORE_BETS" class="group-detail-item"
@@ -43,7 +43,7 @@
       </div>
     </div>
 
-    <div class="game-group mt-20">
+    <div class="game-group mt-20 cursor-not-allowed" @click.stop>
       <div class="group-name group-name--color2">总进球</div>
       <div class="group-detail group-detail--total">
         <div class="group-detail-item" v-for="item in TOTAL_BETS">
@@ -53,7 +53,7 @@
       </div>
     </div>
 
-    <div class="game-group mt-20">
+    <div class="game-group mt-20 cursor-not-allowed" @click.stop>
       <div class="group-name">半全场</div>
       <div class="group-detail">
         <div class="group-detail-item" v-for="item in DOUBLE_RESULT_BETS">

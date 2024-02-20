@@ -12,7 +12,7 @@
       <a-checkbox v-model:checked="game.checked" />
     </template>
 
-    <div class="game-group">
+    <div class="game-group cursor-not-allowed" @click.stop>
       <div class="group-name">半全场</div>
       <div class="group-detail">
         <div class="group-detail-item" v-for="item in DOUBLE_RESULT_BETS">

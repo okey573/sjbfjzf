@@ -122,7 +122,8 @@ $cursors: (
         pointer: pointer,
         wait: wait,
         move: move,
-        help: help
+        help: help,
+        not-allowed: not-allowed
 );
 @each $type in map-keys($cursors) {
   .cursor-#{$type} {

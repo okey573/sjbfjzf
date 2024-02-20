@@ -12,7 +12,7 @@
       <a-checkbox v-model:checked="game.checked" />
     </template>
 
-    <div class="game-group mt-1">
+    <div class="game-group cursor-not-allowed" @click.stop>
       <div class="group-name group-name--color2">让球</div>
       <div class="group-detail">
         <div class="group-detail-item" v-for="item in HANDICAP_RESULT_BETS">
