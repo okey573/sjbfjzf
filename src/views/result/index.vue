@@ -115,7 +115,7 @@
 
     switch (applicationStore.passWay) {
       case 'accumulator':
-        message.error('混合过关还不支持 嘤嘤嘤~')
+        message.error({ content: '混合过关还不支持 嘤嘤嘤~', duration: 1 })
         break
       case 'result':
       case 'handicapResult':
