@@ -120,6 +120,35 @@
     switch (applicationStore.passWay) {
       case 'accumulator':
         message.error({ content: '混合过关还不支持 嘤嘤嘤~', duration: 1 })
+
+        games.forEach((game: Game, index: number) => {
+          // TODO TBD 目前只把比赛列出来了 没有实现逻辑
+          const keyPrefix = `game_${index + 1}_`
+
+          const gameInfo = `${game.home}（主） vs ${game.guest}（客）`
+          const gameColumn = {
+            title: gameInfo,
+            align: 'center',
+            children: []
+          }
+          for (const define of DEFINITION.filter(define => define.key !== 'accumulator')) {
+            gameColumn.children.push({
+              title: define.passWay,
+              children: [{
+                title: `结果`,
+                dataIndex: keyPrefix + applicationStore.passWay + '_bet',
+                key: keyPrefix + applicationStore.passWay + '_bet',
+                align: 'center',
+              }, {
+                title: `赔率`,
+                dataIndex: keyPrefix + applicationStore.passWay + '_odd',
+                key: keyPrefix + applicationStore.passWay + '_odd',
+                align: 'center',
+              }],
+            })
+          }
+          tempColumns.push(gameColumn)
+        })
         break
       case 'result':
       case 'handicapResult':
