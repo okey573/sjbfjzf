@@ -2,6 +2,9 @@ import { DEFINITION } from '@/constants.ts'
 
 const ALL_BETS = DEFINITION.map(d => d.bets).flat()
 
+export type BetName = typeof ALL_BETS[number]['name']
+export type BetKey = typeof ALL_BETS[number]['key']
+
 export type Game = {
   // id
   id: string,
@@ -11,9 +14,12 @@ export type Game = {
   // 主队
   home: string,
   // 客队
-  guest: string
-} & {
-  [key in typeof ALL_BETS[number]['key']]: number
-}
+  guest: string,
+
+
+  checkedBet: Array<BetKey>
+} & Partial<{
+  [key in BetKey]: number
+}>
 
 export type PassWay = typeof DEFINITION[number]['key']

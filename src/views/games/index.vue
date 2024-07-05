@@ -29,7 +29,6 @@
   import { PlusOutlined, DownloadOutlined, UploadOutlined } from '@ant-design/icons-vue'
   import SingleGame from '@/views/games/SingleGame.vue'
   import { useApplicationStore } from '@/stores/application.ts'
-  import type { Game } from '@/types.ts'
   import { nextId } from '@/utils/index.js'
 
   defineOptions({
@@ -41,8 +40,10 @@
     applicationStore.games.push({
       id: nextId(),
       home: '主场',
-      guest: '客场'
-    } as Game)
+      guest: '客场',
+      checked: false,
+      checkedBet: []
+    })
   }
 
   const downloadGames = () => {

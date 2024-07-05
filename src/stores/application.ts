@@ -9,7 +9,31 @@ export const useApplicationStore = defineStore('applicationStore', () => {
 
 
   // 当前添加所有的比赛
-  const games = ref<Array<Game>>([])
+  const games = ref<Array<Game>>([
+    {
+      'id': '5d2z9r89',
+      'home': '德国',
+      'guest': '西班牙',
+      'win$': 5.26,
+      'draw$': 4.25,
+      'lose$': 1.42,
+      'checked': true,
+      checkedBet: []
+    },
+    {
+      'id': 'U67zGNos',
+      'home': '葡萄牙',
+      'guest': '法国',
+      'win': 0,
+      'draw': 0,
+      'lose': 0,
+      'win$': 1.53,
+      'draw$': 3.85,
+      'lose$': 4.65,
+      'checked': true,
+      checkedBet: []
+    }
+  ])
 
   // 过关方式
   const passWay = ref<PassWay>('accumulator')

@@ -7,6 +7,6 @@ export const nextId = (length?: number) => {
   return result
 }
 
-export const effectiveOdd = (odd: number) => {
-  return odd > 0
+export const effectiveOdd = (odd: number | undefined) => {
+  return odd && odd > 0
 }

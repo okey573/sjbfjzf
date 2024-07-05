@@ -36,6 +36,10 @@
       .group-detail-item {
         height: 40px;
         background-color: #fff;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
 
         .group-detail-item-name {
           font-weight: 600;
@@ -51,6 +55,11 @@
 
       .group-detail-item--span3 {
         grid-column-start: span 3;
+      }
+
+      .group-detail-item--checked {
+        background-color: rgb(207, 1, 14);
+        color: rgb(237, 250, 246);
       }
     }
 
