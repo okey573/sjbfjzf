@@ -1,5 +1,8 @@
 <template>
-  <a-input-number v-model:value="magnificationModel" placeholder="购买倍率" @pressEnter="calculate" style="width: 150px">
+  <a-input-number v-model:value="magnificationModel"
+                  placeholder="购买倍率"
+                  @pressEnter="calculate"
+                  style="width: 150px">
     <template #prefix>
       购买倍率：
     </template>
@@ -30,11 +33,11 @@
 <script setup lang="tsx">
   import { defineComponent, reactive, ref } from 'vue'
   import { useApplicationStore } from '@/stores/application.js'
-  import { effectiveOdd } from '@/utils/index.js'
   import type { Game } from '@/types.js'
   import { renderNumber, renderPercentage, renderProfit, renderRatio } from '@/views/result/column-tools.js'
   import { message } from 'ant-design-vue'
   import { DEFINITION } from '@/constants.js'
+  import { BetKey, BetName } from '@/types.js'
 
   defineOptions({
     name: 'Result'
@@ -106,8 +109,6 @@
   const dataSource = ref([])
 
   const calculate = () => {
-    const games: Array<Game> = applicationStore.games.filter(g => g.checked)
-
     let tempColumns = []
     let tempSource = [{
       totalOdd: 1,
@@ -117,10 +118,11 @@
       profitRatio: 0
     }]
 
+    let games: Array<Game>
     switch (applicationStore.passWay) {
       case 'accumulator':
         message.error({ content: '混合过关还不支持 嘤嘤嘤~', duration: 1 })
-
+        games = applicationStore.games.filter(g => g.checked && g.checkedBet.length > 0)
         games.forEach((game: Game, index: number) => {
           // TODO TBD 目前只把比赛列出来了 没有实现逻辑
           const keyPrefix = `game_${index + 1}_`
@@ -157,8 +159,9 @@
       case 'score':
         // 单场比赛可能出现的结果总数
         const define = DEFINITION.find(define => define.key === applicationStore.passWay)!
-        const bets = define.bets! as Array<{key: string, name: string}>
+        const bets = define.bets! as Array<{name: BetName, key: BetKey}>
         const singleGamePossibleCount = bets.length
+        games = applicationStore.games.filter(g => g.checked && g.checkedBet.filter(i => bets.some(b => b.key === i)).length > 0)
         games.forEach((game: Game, index: number) => {
           const keyPrefix = `game_${index + 1}_`
 
@@ -185,7 +188,7 @@
           tempColumns.push(gameColumn)
 
           // 购买的结果
-          const effectiveBets = bets.filter(r => effectiveOdd(game[r.key]))
+          const effectiveBets = bets.filter(r => game.checkedBet.includes(r.key))
           // 单场比赛中奖的概率
           const singleGameWinningOdds = effectiveBets.length / bets.length
           // 每场比赛的中奖概率乘起来就是总的中奖概率
@@ -232,7 +235,9 @@
 
   const Summary = defineComponent(() => {
     return () => {
-      const checkedGames = applicationStore.games.filter(g => g.checked)
+      const define = DEFINITION.find(define => define.key === applicationStore.passWay)!
+      const bets = define.bets! as Array<{name: BetName, key: BetKey}>
+      const checkedGames =applicationStore.games.filter(g => g.checked && g.checkedBet.filter(i => bets.some(b => b.key === i)).length > 0)
       const count = dataSource.value.length
       const profitCount = dataSource.value.filter(item => item.profit > 0).length
       return <div class="font-12">

@@ -7,19 +7,12 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    AButton: typeof import('ant-design-vue/es')['Button']
     ACard: typeof import('ant-design-vue/es')['Card']
     ACheckbox: typeof import('ant-design-vue/es')['Checkbox']
-    ACheckboxGroup: typeof import('ant-design-vue/es')['CheckboxGroup']
     AConfigProvider: typeof import('ant-design-vue/es')['ConfigProvider']
     ADivider: typeof import('ant-design-vue/es')['Divider']
     AEmpty: typeof import('ant-design-vue/es')['Empty']
-    AFlex: typeof import('ant-design-vue/es')['Flex']
-    AInput: typeof import('ant-design-vue/es')['Input']
     AInputNumber: typeof import('ant-design-vue/es')['InputNumber']
-    AInputSearch: typeof import('ant-design-vue/es')['InputSearch']
-    ARadioButton: typeof import('ant-design-vue/es')['RadioButton']
-    ARadioGroup: typeof import('ant-design-vue/es')['RadioGroup']
     ASteps: typeof import('ant-design-vue/es')['Steps']
     ATable: typeof import('ant-design-vue/es')['Table']
     ATabPane: typeof import('ant-design-vue/es')['TabPane']
