@@ -35,21 +35,26 @@
       </div>
     </div>
 
-    <div class="game-group mt-20 cursor-not-allowed" @click.stop>
+    <div class="game-group mt-20" @click.stop>
       <div class="group-name">比分</div>
       <div class="group-detail group-detail--score">
-        <div v-for="item in SCORE_BETS" class="group-detail-item"
-             :class="{'group-detail-item--span3': item.name === '胜其它' || item.name === '负其它'}">
+        <div v-for="item in SCORE_BETS"
+             class="group-detail-item"
+             :class="getClazz(item.key).concat({'group-detail-item--span3': item.name === '胜其它' || item.name === '负其它'})"
+             @click="checkBet(item)">
           <div class="group-detail-item-name">{{ item.name }}</div>
           <div class="group-detail-item-odds" v-content-game-model:[item.key].number></div>
         </div>
       </div>
     </div>
 
-    <div class="game-group mt-20 cursor-not-allowed" @click.stop>
+    <div class="game-group mt-20" @click.stop>
       <div class="group-name group-name--color2">总进球</div>
       <div class="group-detail group-detail--total">
-        <div class="group-detail-item" v-for="item in TOTAL_BETS">
+        <div class="group-detail-item"
+             v-for="item in TOTAL_BETS"
+             :class="getClazz(item.key)"
+             @click="checkBet(item)">
           <div class="group-detail-item-name">{{ item.name }}</div>
           <div class="group-detail-item-odds" v-content-game-model:[item.key].number></div>
         </div>
@@ -59,7 +64,10 @@
     <div class="game-group mt-20 cursor-not-allowed" @click.stop>
       <div class="group-name">半全场</div>
       <div class="group-detail">
-        <div class="group-detail-item" v-for="item in DOUBLE_RESULT_BETS">
+        <div class="group-detail-item"
+             v-for="item in DOUBLE_RESULT_BETS"
+             :class="getClazz(item.key)"
+             @click="checkBet(item)">
           <div class="group-detail-item-name">{{ item.name }}</div>
           <div class="group-detail-item-odds" v-content-game-model:[item.key].number></div>
         </div>
