@@ -61,7 +61,7 @@
       </div>
     </div>
 
-    <div class="game-group mt-20 cursor-not-allowed" @click.stop>
+    <div class="game-group mt-20" @click.stop>
       <div class="group-name">半全场</div>
       <div class="group-detail">
         <div class="group-detail-item"

@@ -12,10 +12,13 @@
       <a-checkbox v-model:checked="game.checked" />
     </template>
 
-    <div class="game-group cursor-not-allowed" @click.stop>
+    <div class="game-group" @click.stop>
       <div class="group-name group-name--color2">总进球</div>
       <div class="group-detail group-detail--total">
-        <div class="group-detail-item" v-for="item in TOTAL_BETS">
+        <div class="group-detail-item"
+             v-for="item in TOTAL_BETS"
+             :class="getClazz(item.key)"
+             @click="checkBet(item)">
           <div class="group-detail-item-name">{{ item.name }}</div>
           <div class="group-detail-item-odds" v-content-game-model:[item.key].number></div>
         </div>
@@ -28,11 +31,36 @@
   import type { Game } from '@/types.js'
   import { TOTAL_BETS } from '@/constants.js'
   import { effectiveOdd } from '@/utils/index.js'
+  import { BetKey, BetName } from '@/types.js'
 
   const props = defineProps<{
     game: Game
   }>()
   const checked = defineModel<boolean>('checked')
+
+  const getClazz = (key: BetKey) => {
+    const v = props.game[key]
+    const clazz = []
+    if (props.game.checkedBet.includes(key)) {
+      clazz.push('group-detail-item--checked')
+    }
+    if (effectiveOdd(v)) {
+      clazz.push('cursor-pointer')
+    } else {
+      clazz.push('cursor-not-allowed')
+    }
+    return clazz
+  }
+  const checkBet = (bet: {name: BetName, key: BetKey}) => {
+    const v = props.game[bet.key]
+    if (!effectiveOdd(v)) return
+    const index = props.game.checkedBet.findIndex(item => item === bet.key)
+    if (index > -1) {
+      props.game.checkedBet.splice(index, 1)
+    } else {
+      props.game.checkedBet.push(bet.key)
+    }
+  }
 
   const vContentGameModel = {
     mounted(el, binding) {
